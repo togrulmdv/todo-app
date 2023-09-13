@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  justify-content: center;
+}
+.input-area {
+  padding: 30px;
+  & button {
+    margin-top: 15px !important;
+  }
+  & h2 {
+    margin: 5px;
+  }
+  & input {
+    width: 100%;
+    border: 0.1px solid lightblue;
+    border-radius: 5px;
+    padding: 10px;
+
+    &::placeholder {
+      color: gray;
+      opacity: 0.7;
+    }
+  }
+}
+.author-list {
+  padding: 30px;
+  & ul {
+    padding: 0px;
+    list-style-type: none;
+    & li {
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 0.1px solid rgb(230, 173, 173);
+      border-radius: 5px;
+
+      & button {
+        background: white;
+        padding: 10px;
+        border: 1px solid red;
+        color: red;
+      }
+
+      & h1 {
+        margin: 0px;
+        font-size: 20px;
+      }
+    }
+  }
+}
