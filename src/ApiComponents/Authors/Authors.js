@@ -8,18 +8,31 @@ const Authors = () => {
   const { authorServices } = useService();
   const getAllQuery = useAuthorData();
   const [newAuthorData, setNewAuthorData] = useState({});
+  const [mutationError, setMutationError] = useState(null);
 
   const { mutate: createNewAuthor } = useMutation(
     () => authorServices.addAuthor(newAuthorData),
     {
-      onSuccess: () => getAllQuery.refetch(),
+      onSuccess: () => {
+        getAllQuery.refetch();
+        setMutationError(null);
+      },
+      onError: (error) => {
+        setMutationError(error);
+      },
     }
   );
 
   const { mutate: deleteAuthor } = useMutation(
     (id) => authorServices.deleteAuthor(id),
     {
-      onSuccess: () => getAllQuery.refetch(),
+      onSuccess: () => {
+        getAllQuery.refetch();
+        setMutationError(null);
+      },
+      onError: (error) => {
+        setMutationError(error);
+      },
     }
   );
 
@@ -36,7 +49,12 @@ const Authors = () => {
       </div>
       <div className="input-area">
         <h2>Add Author</h2>
-        <form onSubmit={createNewAuthor}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            createNewAuthor();
+          }}
+        >
           <input
             name="fullname"
             placeholder="Add Author"
@@ -47,6 +65,7 @@ const Authors = () => {
             Add Author
           </Button>
         </form>
+        {mutationError && <div className="error">{mutationError.message}</div>}
       </div>
       <div className="author-list">
         <ul>
