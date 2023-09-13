@@ -42,6 +42,8 @@ const Authors = () => {
     setNewAuthorData((prev) => ({ ...prev, [inputName]: inputValue }));
   };
 
+  const { data: authorData } = getAllQuery;
+
   return (
     <main>
       <div className="header">
@@ -69,7 +71,7 @@ const Authors = () => {
       </div>
       <div className="author-list">
         <ul>
-          {getAllQuery.data?.data.map((author) => (
+          {authorData?.map((author) => (
             <li key={author.id}>
               <h1>{author.fullname} </h1>
               <button onClick={() => deleteAuthor(author.id)}>✖</button>
